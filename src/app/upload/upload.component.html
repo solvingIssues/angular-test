@@ -1,7 +1,103 @@
-<div class="container">
-    <div class="row">
-        <div class="col-xs-12">
-            <p>upload works!</p>
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-md-6">
+                <p>Upload de Ficheiros</p>
+            </div>
+            <div class="col-xs-12 col-md-6">
+                <button type="submit" id="upload" class="btn btn-danger" [disabled]="!validate()">Finalizar Upload</button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="container"></div>
+            <div class="col-xs-12 col-md-6">
+                <p>image</p>
+            </div>
+
+            <div class="col-xs-12 col-md-6">                
+                <div class="row">
+                    <div class="col-xs-12 col-md-6">
+                        <div *ngIf="title.invalid" class="alert">
+                            <div *ngIf="title.errors?.['required']">O campo titulo é obrigatório</div>
+                        </div>
+                        <label for="title">Title: </label>                    
+                        <input id="title" type="text" [formControl]="title" class="form-control"
+                        formControlName="title"
+                        required
+                        (change) = "validate()"
+                        >
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-xs-12 col-md-6">
+                        <div *ngIf="fileName.invalid" class="alert">
+                            <div *ngIf="fileName.errors?.['required']">É necessário escolher um ficheiro</div>
+                        </div>
+                        <label for="fileName">Escolha um ficheiro: </label>
+                        <input id="fileName" type="file" [formControl]="fileName" class="form-control"
+                        formControlName="fileName"
+                        required
+                        >
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-xs-12 col-md-6">
+                        <div *ngIf="keyWords.invalid" class="alert">
+                            <div *ngIf="keyWords.errors?.['required']">Tem que adicionar pelo menos uma palavra</div>
+                        </div>
+                        <label for="keyWords">Palavras chaves: </label>
+                        <input id="keyWords" type="text" [formControl]="keyWords" class="form-control"
+                        formControlName="keyWords"
+                        required
+                        >
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-xs-12 col-md-6">
+                        <div *ngIf="price.invalid" class="alert">
+                            <div *ngIf="price.errors?.['required']">O campo preço é obrigatório</div>
+                        </div>
+                        <label for="price">Preço: </label>
+                        <input id="price" type="text" [formControl]="price" class="form-control"
+                        formControlName="price"
+                        required
+                        >
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-xs-12 col-md-6">
+                        <div *ngIf="description.invalid" class="alert">
+                            <div *ngIf="description.errors?.['required']">O campo descrição é obrigatório</div>
+                        </div>
+                        <label for="description">Descrição: </label>
+                        <input id="description" type="text" [formControl]="description" class="form-control"
+                        formControlName="description"
+                        required
+                        >
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-xs-12 col-md-6">
+                        <!-- <label for="uploadDate">Data de Upload: </label> -->
+                        <div class="col-12">
+
+                            <div *ngIf="uploadDate.invalid" class="alert">
+                                <div *ngIf="uploadDate.errors?.['required']">O campo descrição é obrigatório</div>
+                            </div>
+                            <label for="uploadDate">Data de upload: </label>
+                            <input id="uploadDate" type="text" [formControl]="uploadDate" class="form-control" readonly
+                                formControlName="uploadDate"
+                                required
+                            >
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-</div>
+</form>

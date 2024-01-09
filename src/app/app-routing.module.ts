@@ -6,9 +6,11 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 
 
 const routes: Routes = [
+  { path: '',   redirectTo: '/', pathMatch: 'full' },
   { path: 'upload', component: UploadComponent, loadChildren: () => import('./upload/upload.module').then(m => m.UploadModule) },
   { path: 'imageList', component: ImageListComponent, loadChildren: () => import('./image-list/image-list.module').then(m => m.ImageListModule) },
-  { path: '**', component: PageNotFoundComponent},
+  { path: '**', component: PageNotFoundComponent,},
+  
 ];
 
 @NgModule({
