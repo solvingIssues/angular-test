@@ -1,9 +1,9 @@
 class ImageUpload {
     title!: string;
     fileName!: string;
-    keyWords?: string [];
+    keyWords!: string [];
     price!: number;
-    description?: string;
+    description!: string;
     uploadDate!: string;
     ImageUpload() {
 

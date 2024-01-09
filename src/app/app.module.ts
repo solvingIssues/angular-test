@@ -4,21 +4,21 @@ import {FormsModule} from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AppComponent } from './app.component';
-import { ImageListComponent } from './image-list/image-list.component';
-import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { NgxBootstrapIconsModule, upload } from 'ngx-bootstrap-icons';
 
+const icons = {
+  upload
+};
 @NgModule({
   declarations: [
     AppComponent,
-    ImageListComponent,
-    PageNotFoundComponent,
   ],
   imports: [
     BrowserModule,
     FormsModule,
     AppRoutingModule,
     NgbModule,
-    //RouterModule.forRoot(routes)
+    NgxBootstrapIconsModule.pick(icons),
   ],
   providers: [],
   bootstrap: [AppComponent]
