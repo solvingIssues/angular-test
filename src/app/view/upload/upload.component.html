@@ -1,4 +1,5 @@
 <div class="upload-wrapper">
+    <app-app-header></app-app-header>
     <form [formGroup]="form" (ngSubmit)="onSubmit($event)">
         <div class="container">
             <div class="row">
@@ -6,9 +7,9 @@
                     <h2>Upload de Ficheiros</h2>
                 </div>
                 <div class="col-xs-12 col-md-6">
-                    <button type="submit" id="upload" class="btn btn-danger float-end" [disabled]="!validate()">
+                    <!-- <button type="submit" id="upload" class="btn btn-danger float-end" [disabled]="!validate()">
                         Finalizar Upload
-                    </button>
+                    </button> -->
                 </div>
             </div>
 
@@ -92,10 +93,13 @@
                                 <div *ngIf="uploadDate.errors?.['required']">O campo descrição é obrigatório</div>
                             </div>
                             <label for="uploadDate">Data de upload: </label>
-                            <input id="uploadDate" type="text" [formControl]="uploadDate" class="form-control" readonly
+                            <!-- <input id="uploadDate" type="text" [formControl]="uploadDate" class="form-control" readonly
                                 formControlName="uploadDate"
                                 required
-                            >                            
+                            >
+                                                    -->
+
+                            
                         </div>
                     </div>
                 </div>

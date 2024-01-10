@@ -1,4 +1,5 @@
 <div class="image-list-wrapper">
+    <app-app-header></app-app-header>
     <form [formGroup]="formList">
         <div class="container">
             <div class="row">
@@ -28,15 +29,15 @@
             <div class="row">
                 <ng-template #elseBlock>
                     <div *ngFor="let img of filteredImages; index as i;" class="col-xs-12 col-md-4 img-container">
-                            <div>
+                            <!-- <div>
                                 <button class="btn btn-danger" (click)="deleteImage($event, img.fileName)">x</button>
                                 <p>
                                     <img src="{{img.fileName}}" alt="image" />
                                 </p>
-                            </div>
+                            </div> -->
                             <div>
-                                <p>{{img.title}}</p>
-                                <p>{{img.price}}$</p>
+                                <!-- <p>{{img.title}}</p>
+                                <p>{{img.price}}$</p> -->
                             </div>
                     </div>
                 </ng-template>

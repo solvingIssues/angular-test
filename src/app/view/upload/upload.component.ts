@@ -1,8 +1,10 @@
 import { AfterViewInit, Component, OnChanges, OnInit, SimpleChanges, inject } from '@angular/core';
 import {CommonModule, JsonPipe, NgIf} from '@angular/common';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, FormsModule, NgModel, NgModelGroup, ReactiveFormsModule, ValidationErrors, Validators } from '@angular/forms';
-import ImageUpload from '../model/image-upload';
+import ImageUpload from '../../model/image-upload';
 import { NgbModule, NgbCalendar, NgbDateStruct, NgbDatepickerModule } from '@ng-bootstrap/ng-bootstrap';
+import { DatePickerComponent } from '../../components/date-picker/date-picker.component';
+import { AppHeaderComponent } from '../app-header/app-header.component';
 
 
 @Component({
@@ -10,11 +12,20 @@ import { NgbModule, NgbCalendar, NgbDateStruct, NgbDatepickerModule } from '@ng-
   selector: 'app-upload',
   templateUrl: './upload.component.html',
   styleUrls: ['./upload.component.scss'],
-  imports: [ReactiveFormsModule, NgIf, NgbDatepickerModule, NgbModule, FormsModule, JsonPipe],
+  imports: [
+    ReactiveFormsModule, 
+    NgIf, 
+    NgbDatepickerModule, 
+    NgbModule, 
+    FormsModule, 
+    JsonPipe, 
+    DatePickerComponent,
+    AppHeaderComponent
+  ],
 })
 
 
-export class UploadComponent implements OnInit{
+export class UploadComponent {
     //upload = new ImageUpload();
        title       = new FormControl('');
        fileName    = new FormControl('');
@@ -39,15 +50,28 @@ export class UploadComponent implements OnInit{
 
   constructor(private formBuilder: FormBuilder) {}
 
-  ngOnInit(): void {
+  // ngOnInit(): void {
+  //   this.validForm = this.validate();
+  //   this.form      = this.formBuilder.group(
+  //     {
+  //       title      : ['', Validators.required,],
+  //       fileName   : ['', Validators.required],
+  //       keyWords   : ['', Validators.required],
+  //       price      : ['', Validators.required,],
+  //       description: ['', Validators.required,],
+  //       uploadDate : ['', Validators.required],
+  //     }
+  //   );
+  // }
+  ngOnAfterContentInit(): void {
     this.validForm = this.validate();
     this.form      = this.formBuilder.group(
       {
-        title      : ['', Validators.required, Validators.pattern("/[a-zA-Z0-9]/")],
+        title      : ['', Validators.required,],
         fileName   : ['', Validators.required],
         keyWords   : ['', Validators.required],
-        price      : ['', Validators.required, Validators.pattern("/[0-9]/")],
-        description: ['', Validators.required, Validators.pattern("/[a-zA-Z0-9]/")],
+        price      : ['', Validators.required,],
+        description: ['', Validators.required,],
         uploadDate : ['', Validators.required],
       }
     );
