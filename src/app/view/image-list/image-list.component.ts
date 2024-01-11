@@ -2,14 +2,15 @@ import { NgIf, JsonPipe, NgFor } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { NgbDatepickerModule } from '@ng-bootstrap/ng-bootstrap';
-import { AppHeaderComponent } from '../app-header/app-header.component';
+import { AppHeaderComponent } from '../../components/app-header/app-header.component';
+import { ListItemComponent } from './list-item/list-item.component';
 
 @Component({
   standalone : true,
   selector   : 'app-image-list',
   templateUrl: './image-list.component.html',
   styleUrls  : ['./image-list.component.scss'],
-  imports    : [ReactiveFormsModule, NgIf, NgFor, NgbDatepickerModule, FormsModule, JsonPipe, AppHeaderComponent],
+  imports    : [ReactiveFormsModule, NgIf, NgFor, NgbDatepickerModule, FormsModule, JsonPipe, AppHeaderComponent, ListItemComponent],
 })
 export class ImageListComponent {
            images         = JSON.parse(localStorage.getItem("images") ?? "{}");
@@ -36,12 +37,9 @@ export class ImageListComponent {
     }
   }
 
-  deleteImage($event:any, fileName:string) {
-    console.log("delete:" + fileName);
-    if(this.images != null && typeof(this.images.data) != "undefined" && this.images.data instanceof Array) {
-      for(let img in this.images.data) {
+  onViewInit() {
+    
+  }
 
-      }
-    }
-  }  
+  
 }

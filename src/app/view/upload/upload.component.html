@@ -1,105 +1,170 @@
-<div class="upload-wrapper">
+<div class="upload-wrapper" [formGroup]="form">
     <app-app-header></app-app-header>
-    <form [formGroup]="form" (ngSubmit)="onSubmit($event)">
+    <!-- <form [formControl]="form" (ngSubmit)="onSubmit($event)"> -->
+    <form (ngSubmit)="onSubmit($event)">
         <div class="container">
             <div class="row">
                 <div class="col-xs-12 col-md-6">
                     <h2>Upload de Ficheiros</h2>
                 </div>
                 <div class="col-xs-12 col-md-6">
-                    <!-- <button type="submit" id="upload" class="btn btn-danger float-end" [disabled]="!validate()">
+                    <button type="submit" id="upload" class="btn btn-danger float-end" [disabled]="!validate()">
                         Finalizar Upload
-                    </button> -->
+                    </button>
                 </div>
             </div>
 
             <div class="row">
                 <div class="container"></div>
                 <div class="col-xs-12 col-md-6">
-                    <p>image</p>
+                    <div [formGroup]="form">
+                        <img 
+                            src="http://via.placeholder.com/300x300"
+                            alt="image"
+                        />
+                    </div>
                 </div>
 
-                <div class="col-xs-12 col-md-6">                
+                <div class="col-xs-12 col-md-6">  
+                    <!-- <div class="row">
+                        <div class="col-xs-12 col-md-6">
+                            <input type="text" class="form-control" id="title"
+                                [(ngModel)]="model.title" name="title"
+                            >
+                        </div>
+                    </div>               -->
                     <div class="row">
                         <div class="col-xs-12 col-md-6">
-                            <div *ngIf="title.invalid" class="alert">
-                                <div *ngIf="title.errors?.['required']">O campo titulo é obrigatório</div>
+                            <div [formGroup]="form">
+                                <ng-template [ngIf]="title.invalid">
+                                    <div class="danger">
+                                        <ng-template [ngIf]="title.errors?.['required']">
+                                            <div>O campo titulo é obrigatório</div>
+                                        </ng-template>
+                                    </div>
+                                </ng-template>
+                                    <label for="title">Title: </label>                    
+                                    <input id="title" type="text" [formControl]="title" class="form-control"
+                                        formControlName="title"
+                                        required
+                                        (change) = "validate()"
+                                        [(ngModel)]="model.title"
+                                        name="title"
+                                    >
                             </div>
-                            <label for="title">Title: </label>                    
-                            <input id="title" type="text" [formControl]="title" class="form-control"
-                                formControlName="title"
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-xs-12 col-md-6">
+                            <div [formGroup]="form">
+                                <ng-template [ngIf]="fileName.invalid">
+                                    <div class="alert">
+                                        <ng-template [ngIf]="fileName.errors?.['required']">
+                                            <div>É necessário escolher um ficheiro</div>
+                                        </ng-template>
+                                    </div>
+                                </ng-template>
+                                <label for="fileName">Escolha um ficheiro: </label>
+                                <input name="fileName" id="fileName" type="file" [formControl]="fileName" class="form-control"
+                                    formControlName="fileName"
+                                    required
+                                    [(ngModel)]="model.fileName"
+                                    name="fileName"
+                                    (change) = "validate()"
+                                    accept="image/*"
+                                >
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-xs-12 col-md-6">
+                            <div [formGroup]="form">
+                                <ng-template [ngIf]="keyWords.invalid">
+                                    <div  class="alert">
+                                        <ng-template [ngIf]="keyWords.errors?.['required']">
+                                            <div >Tem que adicionar pelo menos uma palavra</div>
+                                        </ng-template>
+                                    </div>
+                                </ng-template>
+                                <label for="keyWords">Palavras chaves: </label>
+                                <input id="keyWords" type="text" [formControl]="keyWords" class="form-control"
+                                formControlName="keyWords"
                                 required
+                                [(ngModel)]="model.keyWords" name="keyWords"
                                 (change) = "validate()"
-                            >
+                                >
+                            </div>
                         </div>
                     </div>
 
                     <div class="row">
                         <div class="col-xs-12 col-md-6">
-                            <div *ngIf="fileName.invalid" class="alert">
-                                <div *ngIf="fileName.errors?.['required']">É necessário escolher um ficheiro</div>
-                            </div>
-                            <label for="fileName">Escolha um ficheiro: </label>
-                            <input name="fileName" id="fileName" type="file" [formControl]="fileName" class="form-control"
-                            formControlName="fileName"
-                            required
-                            >
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-xs-12 col-md-6">
-                            <div *ngIf="keyWords.invalid" class="alert">
-                                <div *ngIf="keyWords.errors?.['required']">Tem que adicionar pelo menos uma palavra</div>
-                            </div>
-                            <label for="keyWords">Palavras chaves: </label>
-                            <input id="keyWords" type="text" [formControl]="keyWords" class="form-control"
-                            formControlName="keyWords"
-                            required
-                            >
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-xs-12 col-md-6">
-                            <div *ngIf="price.invalid" class="alert">
-                                <div *ngIf="price.errors?.['required']">O campo preço é obrigatório</div>
-                            </div>
-                            <label for="price">Preço: </label>
-                            <input id="price" type="text" [formControl]="price" class="form-control"
-                            formControlName="price"
-                            required
-                            >
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-xs-12 col-md-6">
-                            <div *ngIf="description.invalid" class="alert">
-                                <div *ngIf="description.errors?.['required']">O campo descrição é obrigatório</div>
-                            </div>
-                            <label for="description">Descrição: </label>
-                            <textarea id="description" type="text" [formControl]="description" class="form-control"
-                            formControlName="description"
-                            required
-                            >
-                            </textarea>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-xs-12 col-md-6">
-                            <div *ngIf="uploadDate.invalid" class="alert">
-                                <div *ngIf="uploadDate.errors?.['required']">O campo descrição é obrigatório</div>
-                            </div>
-                            <label for="uploadDate">Data de upload: </label>
-                            <!-- <input id="uploadDate" type="text" [formControl]="uploadDate" class="form-control" readonly
-                                formControlName="uploadDate"
+                            <div [formGroup]="form">
+                                <ng-template [ngIf]="price.invalid">
+                                    <div class="alert">
+                                        <ng-template [ngIf]="price.errors?.['required']">
+                                            <div >Introduza um preço valido</div>
+                                        </ng-template>
+                                    </div>
+                                </ng-template>
+                                <label for="price">Preço: </label>
+                                <input id="price" type="number" [formControl]="price" class="form-control"
+                                formControlName="price"
                                 required
-                            >
-                                                    -->
+                                [(ngModel)]="model.price" name="price"
+                                value="0"
+                                (change) = "validate()"
+                                >
+                            </div>
+                        </div>
+                    </div>
 
-                            
+                    <div class="row">
+                        <div class="col-xs-12 col-md-6">
+                            <div [formGroup]="form">
+                                <ng-template [ngIf]="description.invalid">
+                                    <div class="alert">
+                                        <ng-template [ngIf]="description.errors?.['required']">
+                                            <div >O campo descrição é obrigatório</div>
+                                        </ng-template>
+                                    </div>
+                                </ng-template>
+                                <label for="description">Descrição: </label>
+                                <textarea id="description" type="text" [formControl]="description" class="form-control"
+                                formControlName="description"
+                                required
+                                [(ngModel)]="model.description" name="description"
+                                (change) = "validate()"
+                                >
+                                </textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-xs-12 col-md-6">
+                            <div [formGroup]="form">
+                                <ng-template [ngIf]="uploadDate.invalid">
+                                <div class="alert">
+                                    <ng-template [ngIf]="uploadDate.errors?.['required']">
+                                        <div>É necessário selecionar uma data de upload</div>
+                                    </ng-template>
+                                </div>
+                            </ng-template>
+                                <label for="uploadDate">Data de upload: </label>  
+                                <input type="text" ngbDatepicker #d="ngbDatepicker"
+                                    id="uploadDate" [formControl]="uploadDate" class="form-control"
+                                    formControlName="uploadDate"
+                                    required
+                                    [(ngModel)]="model.uploadDate" name="uploadDate"
+                                    readonly
+                                    (click)="d.toggle()"
+                                    (change)="validate()"
+                                    [maxDate]="today"
+                                />
+                            </div>
                         </div>
                     </div>
                 </div>

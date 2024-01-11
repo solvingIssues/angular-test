@@ -1,0 +1,19 @@
+.list-item-wrapper {
+    margin-top: 10px;;
+    min-height: 200px;
+    .list-item-image {
+        position:relative;
+        .delete-list-item {
+            position: absolute;
+            top: 0px;
+            right: 0px;
+            padding: 10px;
+        }
+        .download-list-image {
+            position: absolute;
+            bottom: 0px;
+            right: 0px;
+            padding: 10px;
+        }
+    }
+}
